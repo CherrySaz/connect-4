@@ -44,6 +44,14 @@ def computer_move(board):
     valid_move = [col for col in range(len(board[0}])) if is_a_valid_move(board, col)]
     return random.choice(valid_move)
 
+'''Check winner by checking rows, vertically, horizontally and diagonally'''
+    def check_the_winner(board, player):
+        for col in range(len(board[0])):
+            for i in range(len(board) - 3):
+                if all(board[i + j][col] == player for j in range(4))
+                return True
+
+
 
 
  main()
