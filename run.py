@@ -45,11 +45,45 @@ def computer_move(board):
     return random.choice(valid_move)
 
 '''Check winner by checking rows, vertically, horizontally and diagonally'''
-    def check_the_winner(board, player):
+    def check_the_winner(player, board):
+        #Checking Vertically
         for col in range(len(board[0])):
             for i in range(len(board) - 3):
                 if all(board[i + j][col] == player for j in range(4))
                 return True
+
+        #Checking horizontally
+        for row in board:
+            for i in range (len(row) - 3):
+                if all (cell == player for cell in row[i:i+4])
+                return True
+
+
+         #Checking diagonally
+         for i in range(len(board) - 3):
+            for j in range(len(board[0]) - 3)
+            if all (board [i + k][j + k] == player for k in range(4)):
+                return True
+                if all (board[i + 3 - k][j + k] == player in range(4)):
+                    return True
+
+    return False
+
+
+    def main():
+        #Initialize variables and gather input from user
+         rows = 6
+         cols = 7
+         board = create_board(rows, cols)
+
+         player1_name = input('Enter the name of Player 1 (x):')
+         player2_name = input('Enter the name of player 2 (y):')       
+
+
+
+
+
+
 
 
 
