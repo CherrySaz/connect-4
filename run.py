@@ -16,6 +16,9 @@ def create_board(rows, cols):
 current status of board
 """
 def print_board(board):
+for row in board:
+    print ('|'.join (row))
+    print ('-'* (len(row) * 2 - 1))
 
 
 # gameplay
