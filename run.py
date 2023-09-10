@@ -11,19 +11,34 @@ import random
 def create_board(rows, cols):
     return [[' ' for _ in range(cols)] for _ in range(rows)]
 
-
+# currentstatus
+"""
+current status of board
+"""
 def print_board(board):
 
 
+# gameplay
+"""
+
+To check whether or not a move is valid.
+The 'move' consists of a player placing a 'token' in the column slot.
+Return True if valid. If not, False.
+
+"""
+
 def is_vaild_move():
 
-
+# Playing game
+"""
+The player (x or y) making a move / placing their token
+"""
 def make_move(board, col, player):
 
 
-def computer_move(board):
-    
+def computer_move(board):   
 
 def main():
 
-main()  
+main()
+
