@@ -114,7 +114,7 @@ while True:
     if current_player == 'x':
         col = int(input(f"{players[current_player]}, choose a column "
                         f"(0-{cols - 1}): "))
-    if col < 0 or col >= len(board[0]) or not is_vaild_move(board, col):
+    if col < 0 or col >= len(board[0]) or not is_valid_move(board, col):
         print('Invalid move. Try again')
         continue
 
@@ -126,9 +126,9 @@ while True:
 
 make_move(board, col, current_player)
 
-    if check_the_winner(board, current_player)   
-       print(board)
-       print(f'{players[current_player]} wins!')
+if check_the_winner(board, current_player)   
+    print(board)
+    print(f'{players[current_player]} wins!')
     break
 elif all(cell !='' for cell in board[0]):
     print_board(board)
