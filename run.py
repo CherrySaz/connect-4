@@ -49,7 +49,8 @@ def make_move(board, col, player):
 
 
 def computer_move(board):
-    valid_moves = [col for col in range(len(board[0])) if is_valid_moves(board, col)]
+    valid_moves = [col for col in range(len(board[0]))
+                   if is_valid_moves(board, col)]
     return random.choice(valid_moves)
 
 
@@ -90,6 +91,29 @@ def main():
 
     player1_name = input('Enter the name of Player 1 (x):')
     player2_name = input('Enter the name of player 2 (y):')
+
+    while True:
+        game_mode = input('Choose a game mode(1 for player vs player,'
+                          ' 2 for player vs computer): ')
+        if game_mode == '1':
+            player2_name = input(f'Enter the name of {player2_name}\'s '
+                                 'opponent: ')
+            break
+        elif game_mode == '2':
+            break
+        else:
+            print('Invalid choice. Please enter 1 or 2')
+
+
+    players = {'x': player1_name, 'y': player2_name}
+    current_player = 'x'
+
+    while True:
+        print_board(board)
+
+    if current_player = ='x':
+        col = int(input(f"{players[current_player]}, choose a column "
+                        f"(0-{cols - 1}): "))
 
 
 main()
