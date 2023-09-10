@@ -12,8 +12,7 @@ def create_board(rows, cols):
     return [[' ' for _ in range(cols)] for _ in range(rows)]
 
 # currentstatus
-"""current status of board
-"""
+'''current status of board'''
 def print_board(board):
     for row in board:
         print('|'.join(row))
@@ -30,19 +29,21 @@ Return True if valid. If not, False.
 def is_vaild_move():
     return board[0][col]==''
 
+
 # Playing game
-    '''
-The player (x or y) making a move / placing their token
-    '''  
+    '''The player (x or y) making a move / placing their token'''  
 def make_move(board, col, player):
     for row in reversed(board):
-        if row [col]=='':
+        if row[col] =='':
             row[col] = player
             break
 
-def computer_move(board):  
 
-def main():
+''' Generates a random move for the computer that must be valid'''
+def computer_move(board):
+    valid_move = [col for col in range(len(board[0}])) if is_a_valid_move(board, col)]
+    return random.choice(valid_move)
 
-main()
 
+
+ main()
