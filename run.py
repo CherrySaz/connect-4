@@ -30,7 +30,7 @@ Return True if valid. If not, False.
 """
 
 
-def is_vaild_move(board, col):
+def is_valid_move(board, col):
     return board[0][col] == ''
 
 
@@ -105,15 +105,36 @@ def main():
             print('Invalid choice. Please enter 1 or 2')
 
 
-    players = {'x': player1_name, 'y': player2_name}
-    current_player = 'x'
+players = {'x': player1_name, 'y': player2_name}
+current_player = 'x'
 
-    while True:
-        print_board(board)
+while True:
+    print_board(board)
 
-    if current_player = ='x':
+    if current_player == 'x':
         col = int(input(f"{players[current_player]}, choose a column "
                         f"(0-{cols - 1}): "))
+    if col < 0 or col >= len(board[0]) or not is_vaild_move(board, col):
+        print('Invalid move. Try again')
+        continue
+
+    else:
+        print(f'players{current_player} (computer) is thinking... '
+              'please wait..')
+        col = computer_move(board)
 
 
+make_move(board, col, current_player)
+
+    if check_the_winner(board, current_player)   
+       print(board)
+       print(f'{players[current_player]} wins!')
+    break
+elif all(cell !='' for cell in board[0]):
+    print_board(board)
+    print('It's a tie!')
+    break
+
+    current_player = '0' if current_player == 'x' else 'x'
+    if __name__ == '__main__' 
 main()
