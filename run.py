@@ -2,9 +2,9 @@ import random
 
 # functions
 """
-  This is the creation of the game, connect 4 board.
-  The board has rows and columns.
-  Returns the game board in a list of lists.
+This is the creation of the game, connect 4 board.
+The board has rows and columns.
+Returns the game board in a list of lists.
 """
 
 
@@ -18,8 +18,8 @@ def create_board(rows, cols):
 
 def print_board(board):
     for row in board:
-        print('|'.join(row))
-    print('-' * (len(row) * 2 - 1))
+        print(' | '.join(row))
+    print(' - ' * (len(row) * 2 - 1))
 
 
 # gameplay
@@ -54,7 +54,9 @@ def computer_move(board):
     return random.choice(valid_moves)
 
 
-'''Check winner by checking rows, vertically, horizontally and diagonally'''
+'''
+Check winner by checking rows, vertically, horizontally and diagonally
+'''
 
 
 def check_the_winner(player, board):
@@ -68,7 +70,7 @@ def check_the_winner(player, board):
     # Checking horizontally
     for row in board:
         for i in range(len(row) - 3):
-            if all(cell == player for cell in row[i:i+4]):
+            if all(cell == player for cell in row[i:i + 4]):
                 return True
 
 
@@ -113,7 +115,7 @@ while True:
 
     if current_player == 'x':
         col = int(input(f"{players[current_player]}, choose a column "
-                        f"(0-{cols - 1}): "))
+                        f"(0 - {cols - 1}): "))
     if col < 0 or col >= len(board[0]) or not is_valid_move(board, col):
         print('Invalid move. Try again')
         continue
@@ -122,21 +124,18 @@ while True:
         print(f'{players[current_player]} (computer) is thinking... '
               'please wait..')
         computer_
-        
-        col = computer_move(board)
+    col = computer_move(board)
 
 
 make_move(board, col, current_player)
-
-if check_the_winner(board, current_player):
-    print(board)
+if check_the_winner(current_player, board):
+    print_board(board)
     print(f'{players[current_player]} wins!')
     break
-elif all(cell !='' for row in board for cell in row[0]):
-    print_board(board)
-    print("It's a tie!")
-    break
-
+    elif all(cell != ' ' for row in board for cell in row):
+        print_board(board)
+        print("It's a tie!")
+        break
 current_player = '0' if current_player == 'x' else 'x'
 if __name__ == '__main__':
     main()
