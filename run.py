@@ -134,9 +134,9 @@ if check_the_winner(board, current_player):
     break
 elif all(cell !='' for row in board for cell in row[0]):
     print_board(board)
-    print('It's a tie!')
+    print("It's a tie!")
     break
 
-    current_player = '0' if current_player == 'x' else 'x'
-    if __name__ == '__main__' 
-main()
+current_player = '0' if current_player == 'x' else 'x'
+if __name__ == '__main__':
+    main()
