@@ -77,7 +77,7 @@ def check_the_winner(player, board):
         for j in range(len(board[0]) - 3):
             if all(board[i + k][j + k] == player for k in range(4)):
                 return True
-                if all(board[i + 3 - k][j + k] == player in range(4)):
+                if all(board[i + 3 - k][j + k] == player for k in range(4)):
                     return True
 
     return False
