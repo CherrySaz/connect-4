@@ -119,18 +119,20 @@ while True:
         continue
 
     else:
-        print(f'players{current_player} (computer) is thinking... '
+        print(f'{players[current_player]} (computer) is thinking... '
               'please wait..')
+        computer_
+        
         col = computer_move(board)
 
 
 make_move(board, col, current_player)
 
-if check_the_winner(board, current_player)   
+if check_the_winner(board, current_player):
     print(board)
     print(f'{players[current_player]} wins!')
     break
-elif all(cell !='' for cell in board[0]):
+elif all(cell !='' for row in board for cell in row[0]):
     print_board(board)
     print('It's a tie!')
     break
