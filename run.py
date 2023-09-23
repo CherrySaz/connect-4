@@ -24,7 +24,7 @@ def create_board(rows, cols):
 
 def print_board(board):
     for row in board:
-        row_str =' | '.join(row)
+        row_str = ' | '.join(row)
         print(row_str)
         print(' - ' * (len(row) * 2 - 1))
 
@@ -127,27 +127,35 @@ while True:
 
     if current_player == 'x':
         col = int(input(f"{players[current_player]}, choose a column "
-                        f"(0 - {cols - 1}): "))
-        if col < 0 or col >= len(board[0]) or not is_valid_move(board, col):
-            print('Invalid move. Try again')
+                        f"(0 - {cols - 1}):"))
+        # Check if col is within the valid range
+        if col < 0 or col >= cols:
+            print('Invalid column. '
+                  'Please choose a column within the valid range.')
+            continue
+
+        if not is_valid_move(board, col):
+            print('Column is full. Try again')
             continue
         else:
             print(f'{players[current_player]} (computer) is thinking... '
                   'please wait..')
             col = computer_move(board)
 
-        make_move(board, col, current_player)
+    make_move(board, col, current_player)
 
-        if check_the_winner(current_player, board):
-            print_board(board)
-            print(f'{players[current_player]} wins!')
-            break
-        elif all(cell != ' ' for row in board for cell in row):
-            print_board(board)
-            print("It's a tie!")
-            break
-
-        current_player = 'y' if current_player == 'x' else 'x'
+    if check_the_winner(current_player, board):
+        print_board(board)
+        print(f'{players[current_player]} wins!')
+        break
+    elif all(cell != ' ' for row in board for cell in row):
+        print_board(board)
+        print("It's a tie!")
+        break
+    if current_player == 'x':
+        current_player = 'y'
+    else:
+        current_player = 'x'
 
 
 if __name__ == '__main__':
