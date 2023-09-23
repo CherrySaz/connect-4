@@ -147,12 +147,8 @@ while True:
             print('Column is full. Try again')
             continue
 
-        # Splitting the long line as too long
-        thinking_message = (
-            f'{players[current_player]} (computer) is thinking...'
-            ' please wait..'
-        )
-        print(thinking_message)
+    else:  # Computer's turn
+        print(f'{players[current_player]} (computer) is thinking... please wait..')
         col = computer_move(board)
 
     make_move(board, col, current_player)
