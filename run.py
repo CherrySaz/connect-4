@@ -38,7 +38,7 @@ Return True if valid. If not, False.
 
 
 def is_valid_move(board, col):
-    return board[0][col] == ''
+    return board[0][col] == ' '
 
 
 # Playing game
@@ -128,6 +128,7 @@ if __name__ == '__main__':
 while True:
     print_board(board)
 
+while True:
     if current_player == 'x':
         while True:
             try:
@@ -146,9 +147,11 @@ while True:
         if not is_valid_move(board, col):
             print('Column is full. Try again')
             continue
-
-    else:  # Computer's turn
-        print(f'{players[current_player]} (computer) is thinking... please wait..')
+        thinking_message = (
+            f'{players[current_player]} (computer) is thinking...'
+            ' please wait..'
+        )
+        print(thinking_message)
         col = computer_move(board)
 
     make_move(board, col, current_player)
@@ -156,11 +159,11 @@ while True:
     if check_the_winner(current_player, board):
         print_board(board)
         print(f'{players[current_player]} wins!')
-        break  # To break out of the loop when a player wins
+        break  # To break from loop when a player wins
     elif all(cell != ' ' for row in board for cell in row):
         print_board(board)
         print("It's a tie!")
-        break  # To break out of the loop in case of a tie
+        break  # To break from loop in case of tie
 
     # Toggle the current player for the next turn
     current_player = 'y' if current_player == 'x' else 'x'
