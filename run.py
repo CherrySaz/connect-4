@@ -1,5 +1,11 @@
 import random
 
+# game board and player_1 and player_2 names here
+board = []
+cols = 7
+player1_name = ""
+player2_name = ""
+
 # functions
 """
 This is the creation of the game, connect 4 board.
@@ -18,8 +24,9 @@ def create_board(rows, cols):
 
 def print_board(board):
     for row in board:
-        print(' | '.join(row))
-    print(' - ' * (len(row) * 2 - 1))
+        row_str =' | '.join(row)
+        print(row_str)
+        print(' - ' * (len(row) * 2 - 1))
 
 
 # gameplay
@@ -35,7 +42,7 @@ def is_valid_move(board, col):
 
 
 # Playing game
-    '''The player (x or y) making a move / placing their token'''
+'''The player (x or y) making a move / placing their token'''
 
 
 def make_move(board, col, player):
@@ -50,7 +57,7 @@ def make_move(board, col, player):
 
 def computer_move(board):
     valid_moves = [col for col in range(len(board[0]))
-                   if is_valid_moves(board, col)]
+                   if is_valid_move(board, col)]
     return random.choice(valid_moves)
 
 
@@ -60,7 +67,6 @@ Check winner by checking rows, vertically, horizontally and diagonally
 
 
 def check_the_winner(player, board):
-
     # Checking Vertically
     for col in range(len(board[0])):
         for i in range(len(board) - 3):
@@ -73,38 +79,44 @@ def check_the_winner(player, board):
             if all(cell == player for cell in row[i:i + 4]):
                 return True
 
-
-# Checking diagonally
+    # Checking diagonally (top-left to bottom-right)
     for i in range(len(board) - 3):
         for j in range(len(board[0]) - 3):
             if all(board[i + k][j + k] == player for k in range(4)):
                 return True
-                if all(board[i + 3 - k][j + k] == player for k in range(4)):
-                    return True
+
+    # Checking diagonally (top-right to bottom-left)
+    for i in range(len(board) - 3):
+        for j in range(3, len(board[0])):
+            if all(board[i + k][j - k] == player for k in range(4)):
+                return True
 
     return False
 
 
 def main():
-    # Initialize variables and gather input from user
+    global player1_name, player2_name, board, cols
+
+    # Initialize variables and gather input from the user
     rows = 6
     cols = 7
     board = create_board(rows, cols)
 
-    player1_name = input('Enter the name of Player 1 (x):')
-    player2_name = input('Enter the name of player 2 (y):')
+    player1_name = input('Enter the name of Player 1 (x): ')
+    player2_name = input('Enter the name of player 2 (y): ')
 
-    while True:
-        game_mode = input('Choose a game mode(1 for player vs player,'
-                          ' 2 for player vs computer): ')
-        if game_mode == '1':
-            player2_name = input(f'Enter the name of {player2_name}\'s '
-                                 'opponent: ')
-            break
-        elif game_mode == '2':
-            break
-        else:
-            print('Invalid choice. Please enter 1 or 2')
+
+while True:
+    game_mode = input('Choose a game mode(1 for player vs player,'
+                      ' 2 for player vs computer): ')
+    if game_mode == '1':
+        player2_name = input(f'Enter the name of {player1_name}\'s '
+                             'opponent: ')
+        break
+    elif game_mode == '2':
+        break
+    else:
+        print('Invalid choice. Please enter 1 or 2')
 
 
 players = {'x': player1_name, 'y': player2_name}
@@ -116,26 +128,27 @@ while True:
     if current_player == 'x':
         col = int(input(f"{players[current_player]}, choose a column "
                         f"(0 - {cols - 1}): "))
-    if col < 0 or col >= len(board[0]) or not is_valid_move(board, col):
-        print('Invalid move. Try again')
-        continue
+        if col < 0 or col >= len(board[0]) or not is_valid_move(board, col):
+            print('Invalid move. Try again')
+            continue
+        else:
+            print(f'{players[current_player]} (computer) is thinking... '
+                  'please wait..')
+            col = computer_move(board)
 
-    else:
-        print(f'{players[current_player]} (computer) is thinking... '
-              'please wait..')
-        computer_
-    col = computer_move(board)
+        make_move(board, col, current_player)
+
+        if check_the_winner(current_player, board):
+            print_board(board)
+            print(f'{players[current_player]} wins!')
+            break
+        elif all(cell != ' ' for row in board for cell in row):
+            print_board(board)
+            print("It's a tie!")
+            break
+
+        current_player = 'y' if current_player == 'x' else 'x'
 
 
-make_move(board, col, current_player)
-if check_the_winner(current_player, board):
-    print_board(board)
-    print(f'{players[current_player]} wins!')
-    break
-    elif all(cell != ' ' for row in board for cell in row):
-        print_board(board)
-        print("It's a tie!")
-        break
-current_player = '0' if current_player == 'x' else 'x'
 if __name__ == '__main__':
     main()
