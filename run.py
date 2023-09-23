@@ -128,7 +128,6 @@ if __name__ == '__main__':
 while True:
     print_board(board)
 
-while True:
     if current_player == 'x':
         while True:
             try:
@@ -147,11 +146,11 @@ while True:
         if not is_valid_move(board, col):
             print('Column is full. Try again')
             continue
-        thinking_message = (
-            f'{players[current_player]} (computer) is thinking...'
-            ' please wait..'
-        )
-        print(thinking_message)
+        else:  # Computer's turn
+            print(f'{players[current_player]} (computer) is thinking...'
+                  'please wait..')
+
+
         col = computer_move(board)
 
     make_move(board, col, current_player)
