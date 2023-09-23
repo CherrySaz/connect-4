@@ -122,41 +122,49 @@ while True:
 players = {'x': player1_name, 'y': player2_name}
 current_player = 'x'
 
+if __name__ == '__main__':
+    main()
+
 while True:
     print_board(board)
 
     if current_player == 'x':
-        col = int(input(f"{players[current_player]}, choose a column "
-                        f"(0 - {cols - 1}):"))
-        # Check if col is within the valid range
-        if col < 0 or col >= cols:
-            print('Invalid column. '
-                  'Please choose a column within the valid range.')
-            continue
+        while True:
+            try:
+                col = int(input(f"{players[current_player]}, choose a column "
+                                f"(0 - {cols - 1}):"))
+
+                if col < 0 or col >= cols:
+                    print('Invalid column. '
+                          'Please choose a column within the valid range.')
+                    continue
+                else:
+                    break  # Exit the loop if the input is valid
+            except ValueError:
+                print('Invalid input. Please enter a valid number.')
 
         if not is_valid_move(board, col):
             print('Column is full. Try again')
             continue
-        else:
-            print(f'{players[current_player]} (computer) is thinking... '
-                  'please wait..')
-            col = computer_move(board)
+
+        # Splitting the long line as too long
+        thinking_message = (
+            f'{players[current_player]} (computer) is thinking...'
+            ' please wait..'
+        )
+        print(thinking_message)
+        col = computer_move(board)
 
     make_move(board, col, current_player)
 
     if check_the_winner(current_player, board):
         print_board(board)
         print(f'{players[current_player]} wins!')
-        break
+        break  # To break out of the loop when a player wins
     elif all(cell != ' ' for row in board for cell in row):
         print_board(board)
         print("It's a tie!")
-        break
-    if current_player == 'x':
-        current_player = 'y'
-    else:
-        current_player = 'x'
+        break  # To break out of the loop in case of a tie
 
-
-if __name__ == '__main__':
-    main()
+    # Toggle the current player for the next turn
+    current_player = 'y' if current_player == 'x' else 'x'
