@@ -1,14 +1,13 @@
 import random
-import sys
 
-# game board and player_1 and player_2 names here
+# game board, rows, cols and player_1 and player_2 names here
 board = []
 cols = 7
 rows = 6
 player1_name = ""
 player2_name = ""
 
-# functions
+# functions for creation of game
 """
 This is the creation of the game, connect 4 board.
 The board has rows and columns.
@@ -40,7 +39,10 @@ Return True if valid. If not, False.
 
 
 def is_valid_move(board, col):
-    return board[0][col] == ' '
+    if 0 <= col < len(board[0]):
+        return board[0][col] == ' '
+    else:
+        return False
 
 
 # Playing game
@@ -95,36 +97,36 @@ def check_the_winner(player, board):
 
     return False
 
+# Gameplay function
 
-def main():
-    global player1_name, board
 
-    # Initialize variables and gather input from the user
+def play_game():
+    global player1_name, player2_name, board
+
     rows = 6
     cols = 7
     board = create_board(rows, cols)
 
-    player1_name = input('Enter the name of {Player 1} (x): ')
+    # Initialize variables and gather input from the user
+
+    player1_name = input('Enter the name of Player 1 (x): ')
+    player2_name = input('Enter the name of Player 2 (y): ')
 
 
-while True:
-    game_mode = input('Choose a game mode(1 for player vs player,'
-                      ' 2 for player vs computer): ')
-    if game_mode == '1':
-        player2_name = input(f'Enter the name of {player1_name}\'s '
-                             'opponent: ')
-        break
-    elif game_mode == '2':
-        break
-    else:
-        print('Invalid choice. Please enter 1 or 2')
+game_mode = input('Choose a game mode(1 for player vs player,'
+                  ' 2 for computer): ')
+
+
+if game_mode == '1':
+    player2_name = input(f'Enter the name of {player1_name}\'s opponent: ')
+elif game_mode == '2':
+    pass   # to continue without breaking
+else:
+    print('Invalid choice. Please enter 1 or 2')
 
 
 players = {'x': player1_name, 'y': player2_name}
 current_player = 'x'
-
-if __name__ == '__main__':
-    main()
 
 while True:
     print_board(board)
@@ -148,6 +150,8 @@ while True:
             print('Column is full. Try again')
             continue
     else:
+        col = computer_move(board)
+
         make_move(board, col, current_player)  # Make the move immediately
 
     print_board(board)  # Display the updated board
@@ -157,32 +161,26 @@ while True:
         print(f'{players[current_player]} (computer) is thinking...'
               'please wait..')
 
-    col = computer_move(board)
+        col = computer_move(board)
 
-    make_move(board, col, current_player)
+        make_move(board, col, current_player)
 
-    if check_the_winner(current_player, board):
-        print_board(board)
-        print(f'{players[current_player]} wins!')
-        break  # To break from loop when a player wins
-    elif all(cell != ' ' for row in board for cell in row):
-        print_board(board)
-        print("It's a tie!")
-        break  # To break from loop in case of tie
+        if check_the_winner(current_player, board):
+            print_board(board)
+            print(f'{players[current_player]} wins!')
+            break  # To break from loop when a player wins
+        elif all(cell != ' ' for row in board for cell in row):
+            print_board(board)
+            print("It's a tie!")
+            break  # To break from loop in case of tie
 
-    # Toggle the current player for the next turn
-    current_player = 'y' if current_player == 'x' else 'x'
-
-
-def play_game():
-    if __name__ == '__main__':
-        while True:
-            play_game()
-            play_again = input('Do you want to play again? (yes / no):')
-        if play_again.lower() != 'yes':
-            sys.exit()
+        # Toggle the current player for the next turn
+        current_player = 'y' if current_player == 'x' else 'x'
 
 
 if __name__ == '__main__':
     while True:
-        main()
+        play_game()
+        play_again = input('Do you want to play again? (yes / no): ')
+        if play_again.lower() != 'yes':
+            break  # Exit the game loop gracefully
