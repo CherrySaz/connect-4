@@ -1,8 +1,10 @@
 import random
+import sys
 
 # game board and player_1 and player_2 names here
 board = []
 cols = 7
+rows = 6
 player1_name = ""
 player2_name = ""
 
@@ -95,15 +97,14 @@ def check_the_winner(player, board):
 
 
 def main():
-    global player1_name, player2_name, board, cols
+    global player1_name, board
 
     # Initialize variables and gather input from the user
     rows = 6
     cols = 7
     board = create_board(rows, cols)
 
-    player1_name = input('Enter the name of Player 1 (x): ')
-    player2_name = input('Enter the name of player 2 (y): ')
+    player1_name = input('Enter the name of {Player 1} (x): ')
 
 
 while True:
@@ -131,7 +132,7 @@ while True:
     if current_player == 'x':
         while True:
             try:
-                col = int(input(f"{players[current_player]}, choose a column "
+                col = int(input(f"{players[current_player]} choose a column "
                                 f"(0 - {cols - 1}):"))
 
                 if col < 0 or col >= cols:
@@ -146,12 +147,17 @@ while True:
         if not is_valid_move(board, col):
             print('Column is full. Try again')
             continue
-        else:  # Computer's turn
-            print(f'{players[current_player]} (computer) is thinking...'
-                  'please wait..')
+    else:
+        make_move(board, col, current_player)  # Make the move immediately
 
+    print_board(board)  # Display the updated board
 
-        col = computer_move(board)
+    # Computer's turn
+    if current_player == 'x':
+        print(f'{players[current_player]} (computer) is thinking...'
+              'please wait..')
+
+    col = computer_move(board)
 
     make_move(board, col, current_player)
 
@@ -166,3 +172,17 @@ while True:
 
     # Toggle the current player for the next turn
     current_player = 'y' if current_player == 'x' else 'x'
+
+
+def play_game():
+    if __name__ == '__main__':
+        while True:
+            play_game()
+            play_again = input('Do you want to play again? (yes / no):')
+        if play_again.lower() != 'yes':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    while True:
+        main()
