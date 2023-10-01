@@ -108,43 +108,53 @@ def play_game():
             print_board(board)
 
             try:
-                prompt = (
-                    f"{players[current_player]} choose a column "
-                    f"(0 - {cols - 1}): "
-                 )
-                col_input = input(prompt).strip()
-                if col_input.isdigit():
-                    col = int(col_input)
-                if 0 <= col < cols:
-                    if is_valid_move(board, col):
+                if current_player != 'Computer':
+                    prompt = (
+                        f"{players[current_player]} choose a column "
+                        f"(0 - {cols - 1}): "
+                    )
+                    col_input = input(prompt).strip()
+                    if col_input.isdigit():
+                        col = int(col_input)
+                    if 0 <= col < cols:
+                        if is_valid_move(board, col):
+                            make_move(board, col, current_player)
+                            if check_the_winner(current_player, board):
+                                print_board(board)
+                                print(f'{players[current_player]} wins!')
+                                break
+                            elif all(
+                                cell != ' '
+                                for row in board
+                                for cell in row
+                            ):
+                                print_board(board)
+                                print("It's a tie!")
+                                break
+                            # Switch players
+                            if current_player == 'x':
+                                current_player = 'o'
+                            else:
+                                current_player = 'x'
+                        else:
+                            print('Invalid column. '
+                                  'Please choose a column '
+                                  'within the valid range.')
+                    else:
+                        print('Invalid input. Please enter a valid number.')
+                else:  # Computer's turn
+                    col = computer_move(board)
+                    if col is not None:
                         make_move(board, col, current_player)
                         if check_the_winner(current_player, board):
                             print_board(board)
                             print(f'{players[current_player]} wins!')
                             break
-                        elif all(
-                            cell != ' '
-                            for row in board
-                            for cell in row
-                        ):
-                            print_board(board)
-                            print("It's a tie!")
-                            break
-                        # Switch players
-                        current_player = 'o' if current_player == 'x' else 'x'
-                    else:
-                        print('Invalid column. '
-                              'Please choose a column '
-                              'within the valid range.')
-                else:
-                    print('Invalid input. Please enter a valid number.')
-            except ValueError:
-                print('Invalid input. Please enter a valid number.')
-
-        choice = play_again()
-        if choice == 'no':
-            break
-
-
-if __name__ == '__main__':
-    play_game()
+                if check_the_winner(current_player, board):
+                print_board(board)
+                print(f'{players[current_player]} wins!')
+                break
+            elif all(cell != ' ' for row in board for cell in row):
+               print_board(board)
+               print("It's a tie!")
+        break
