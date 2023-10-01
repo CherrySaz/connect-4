@@ -70,6 +70,17 @@ def check_the_winner(player, board):
 
     return False
 
+# Function to ask if players want to play again
+
+
+def play_again():
+    while True:
+        choice = input('Do you want to play again? (yes / no): ').lower()
+        if choice in ('yes', 'no'):
+            return choice
+        else:
+            print('Invalid choice. Please enter "yes" or "no".')
+
 # Main gameplay function
 
 
@@ -80,7 +91,7 @@ def play_game():
         board = create_board(rows, cols)
         player1_name = input('Enter the name of Player 1 (x): ')
         game_mode = input('Choose a game mode (1 for player vs player, '
-                          '2 for computer): ')
+                          '2 for player vs computer): ')
 
         if game_mode == '1':
             player2_name = input('Enter the name of Player 2 (o): ')
@@ -95,6 +106,7 @@ def play_game():
 
         while True:
             print_board(board)
+
             try:
                 prompt = (
                     f"{players[current_player]} choose a column "
@@ -110,25 +122,29 @@ def play_game():
                             print_board(board)
                             print(f'{players[current_player]} wins!')
                             break
-                        elif all(cell != ' ' for row in board for cell in row):
+                        elif all(
+                            cell != ' '
+                            for row in board
+                            for cell in row
+                        ):
                             print_board(board)
                             print("It's a tie!")
                             break
-# Switch players
-                        if current_player == 'x':
-                            current_player = 'o'
+                        # Switch players
+                        current_player = 'o' if current_player == 'x' else 'x'
                     else:
                         print('Invalid column. '
-                              'Please choose a column within the valid range.')
+                              'Please choose a column '
+                              'within the valid range.')
                 else:
                     print('Invalid input. Please enter a valid number.')
             except ValueError:
                 print('Invalid input. Please enter a valid number.')
 
+        choice = play_again()
+        if choice == 'no':
+            break
+
 
 if __name__ == '__main__':
-    while True:
-        play_game()
-        play_again = input('Do you want to play again? (yes / no): ')
-        if play_again.lower() != 'yes':
-            break
+    play_game()
