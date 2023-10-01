@@ -87,7 +87,6 @@ def play_game():
         player2_name = "Computer"
     else:
         print('Invalid choice. Please enter 1 or 2')
-        return
 
     players = {'x': player1_name, 'y': player2_name}
     current_player = 'x'
@@ -108,7 +107,7 @@ def play_game():
                     if 0 <= col < cols:
                         if is_valid_move(board, col):
                             break
-                
+
                         print('Invalid column. '
                               'Please choose a column within the valid range.')
                     else:
@@ -116,7 +115,7 @@ def play_game():
                 except ValueError:
                     print('Invalid input. Please enter a valid number.')
 
-    make_move(board, col, current_player)
+            make_move(board, col, current_player)
             if check_the_winner(current_player, board):
                 print_board(board)
                 print(f'{players[current_player]} wins!')
@@ -125,9 +124,9 @@ def play_game():
                 print_board(board)
                 print("It's a tie!")
                 break
-
-        if current_player == 'y':
-            print(f'{players[current_player]} is thinking... please wait..')
+            if current_player == 'y':
+                print(f'{players[current_player]} is thinking...'
+                      ' please wait..')
 
             col = computer_move(board)
 
