@@ -74,74 +74,56 @@ def check_the_winner(player, board):
 
 
 def play_game():
-    cols = 7
-    rows = 6
-    board = create_board(rows, cols)
-    player1_name = input('Enter the name of Player 1 (x): ')
-    game_mode = input('Choose a game mode (1 for player vs player, '
-                      '2 for computer): ')
-
-    if game_mode == '1':
-        player2_name = input(f'Enter the name of {player1_name}\'s opponent: ')
-    elif game_mode == '2':
-        player2_name = "Computer"
-    else:
-        print('Invalid choice. Please enter 1 or 2')
-
-    players = {'x': player1_name, 'y': player2_name}
-    current_player = 'x'
-
     while True:
-        print_board(board)
+        cols = 7
+        rows = 6
+        board = create_board(rows, cols)
+        player1_name = input('Enter the name of Player 1 (x): ')
+        game_mode = input('Choose a game mode (1 for player vs player, '
+                          '2 for computer): ')
 
-        if current_player == 'x':
-            while True:
-                try:
-                    prompt = (
-                        f"{players[current_player]} choose a column "
-                        f"(0 - {cols - 1}): "
-                     )
-                    col_input = input(prompt).strip()
-                    if col_input.isdigit():
-                        col = int(col_input)
-                    if 0 <= col < cols:
-                        if is_valid_move(board, col):
+        if game_mode == '1':
+            player2_name = input('Enter the name of Player 2 (o): ')
+        elif game_mode == '2':
+            player2_name = "Computer"
+        else:
+            print('Invalid choice. Please enter 1 or 2')
+            return
+
+        players = {'x': player1_name, 'o': player2_name}
+        current_player = 'x'
+
+        while True:
+            print_board(board)
+            try:
+                prompt = (
+                    f"{players[current_player]} choose a column "
+                    f"(0 - {cols - 1}): "
+                 )
+                col_input = input(prompt).strip()
+                if col_input.isdigit():
+                    col = int(col_input)
+                if 0 <= col < cols:
+                    if is_valid_move(board, col):
+                        make_move(board, col, current_player)
+                        if check_the_winner(current_player, board):
+                            print_board(board)
+                            print(f'{players[current_player]} wins!')
                             break
-
+                        elif all(cell != ' ' for row in board for cell in row):
+                            print_board(board)
+                            print("It's a tie!")
+                            break
+# Switch players
+                        if current_player == 'x':
+                            current_player = 'o'
+                    else:
                         print('Invalid column. '
                               'Please choose a column within the valid range.')
-                    else:
-                        print('Invalid input. Please enter a valid number.')
-                except ValueError:
+                else:
                     print('Invalid input. Please enter a valid number.')
-
-            make_move(board, col, current_player)
-            if check_the_winner(current_player, board):
-                print_board(board)
-                print(f'{players[current_player]} wins!')
-                break
-            elif all(cell != ' ' for row in board for cell in row):
-                print_board(board)
-                print("It's a tie!")
-                break
-            if current_player == 'y':
-                print(f'{players[current_player]} is thinking...'
-                      ' please wait..')
-
-            col = computer_move(board)
-
-            make_move(board, col, current_player)
-
-            if check_the_winner(current_player, board):
-                print_board(board)
-                print(f'{players[current_player]} wins!')
-                break
-            elif all(cell != ' ' for row in board for cell in row):
-                print_board(board)
-                print("It's a tie!")
-                break
-
-        current_player = 'y' if current_player == 'x' else 'x'
+            except ValueError:
+                print('Invalid input. Please enter a valid number.')
 
 
 if __name__ == '__main__':
