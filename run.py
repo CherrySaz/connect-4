@@ -1,4 +1,5 @@
 import random
+import time
 
 # Create game board with specified rows and columns
 
@@ -144,16 +145,23 @@ def play_game():
                                   'Please enter a valid number.')
                     else:
                         print('Invalid input. Please enter a valid number.')
-                else:  # Computer's turn
-                    print('Please wait...Computer is thinking...')
+                else:
+                    print(f'{players[current_player]} '
+                          'Please wait...Computer is thinking...')
+                    time.sleep(2)  # Time delay while computer thinks
                     col = computer_move(board)
+                    #  To get random move from index
                     if col is not None:
                         make_move(board, col, current_player)
                         if check_the_winner(current_player, board):
                             print_board(board)
                             print(f'{players[current_player]} wins!')
                             break
-                        if all(cell != ' ' for row in board for cell in row):
+                        elif all(
+                            cell != ' '
+                            for row in board
+                            for cell in row
+                        ):
                             print_board(board)
                             print("It's a tie!")
                             break
