@@ -1,7 +1,9 @@
 import random
+from random import randint
 import time
 
-# Create game board with specified rows and columns
+
+# Create game board with specified rows and column
 
 
 def create_board(rows, cols):
@@ -34,14 +36,14 @@ def make_move(board, col, player):
             row[col] = player
             break
 
-# Generate a random move for the computer player
+# Generate a random move for the computer
 
 
 def computer_move(board):
     valid_moves = [col for col in range(len(board[0]))
                    if is_valid_move(board, col)]
     if valid_moves:
-        return random.choice(valid_moves)
+        return random.randint(0, len(valid_moves) - 1)
     else:
         return None  # No valid moves left
 
@@ -86,6 +88,7 @@ def play_again():
 
 
 def play_game():
+    print('Welcome to Connect 4!')
     while True:
         cols = 7
         rows = 6
@@ -149,7 +152,7 @@ def play_game():
                     print(f'{players[current_player]} '
                           'Please wait...Computer is thinking...')
                     time.sleep(2)  # Time delay while computer thinks
-                    col = computer_move(board)
+                    col = random.randint(0, cols - 1)
                     #  To get random move from index
                     if col is not None:
                         make_move(board, col, current_player)
