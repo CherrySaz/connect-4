@@ -1,8 +1,25 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Welcome to my Connect 4 Game
 
-Welcome,
+# About my project
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+Welcome to my Connect 4 game. This is a fun strategy game created using Python and has been built in the terminal. It is a Player vs Player game, with the option to play against the computer if required. 
+As a small child, Connect 4 was a family favourite, which gave me my inspiration for my project.
+
+# Some history about  the game
+
+The game was originally released under a company called 'Score Four' until in 1968, it was bought by a company called 'Funtastic'.
+The more modern version of the game was created by 2 business partners, 'Howard Wexler', a toy inventor, and 'Ned Strongin'.
+The game was licensed in 1974 by Milton Bradley, which was later purchased by a toy company that is still going strong today, Hasbro.
+In 1988, Connect 4 was solved for the first time. Today, there are various different sizes of the game. There's a household version, a travel version, even a giant garden version so you can play it outside in the warmer months.There are even giant versions of Connect 4 in pub gardens and play areas around the Country, which just shows its popularity!
+
+## 
+
+
+
+
+
+## Game History
+
 
 ## Reminders
 
@@ -30,3 +47,4 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
