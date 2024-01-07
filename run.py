@@ -1,183 +1,138 @@
 import random
-from random import randint
 import time
-
-
-# Create game board with specified rows and column
-
-
-def create_board(rows, cols):
-    return [[' ' for _ in range(cols)] for _ in range(rows)]
-
-# Display current status of the game board
 
 
 def print_board(board):
     for row in board:
-        row_str = ' | '.join(row)
-        print(row_str)
-        print('- ' * (len(row) * 2 - 1))
-
-# Check whether a move is valid in the given column
-
-
-def is_valid_move(board, col):
-    if 0 <= col < len(board[0]):
-        return board[0][col] == ' '
-    else:
-        return False
-
-# Make a move by placing a token in the specified column
+        print("|", end="")
+        for cell in row:
+            print(f" {cell} |", end="")
+        print("\n" + "-" * 29)
 
 
-def make_move(board, col, player):
-    for row in reversed(board):
-        if row[col] == ' ':
-            row[col] = player
-            break
-
-# Generate a random move for the computer
-
-
-def computer_move(board):
-    valid_moves = [col for col in range(len(board[0]))
-                   if is_valid_move(board, col)]
-    if valid_moves:
-        return random.randint(0, len(valid_moves) - 1)
-    else:
-        return None  # No valid moves left
-
-# Check if a player has won the game
-
-
-def check_the_winner(player, board):
-    for col in range(len(board[0])):
-        for i in range(len(board) - 3):
-            if all(board[i + j][col] == player for j in range(4)):
+def check_win(board, player):
+    # Check horizontally
+    for row in range(6):
+        for col in range(4):
+            if all(board[row][col + i] == player for i in range(4)):
                 return True
 
-    for row in board:
-        for i in range(len(row) - 3):
-            if all(cell == player for cell in row[i:i + 4]):
+    # Check vertically
+    for col in range(7):
+        for row in range(3):
+            if all(board[row + i][col] == player for i in range(4)):
                 return True
 
-    for i in range(len(board) - 3):
-        for j in range(len(board[0]) - 3):
-            if all(board[i + k][j + k] == player for k in range(4)):
+    # Check diagonally (from top-left to bottom-right)
+    for row in range(3):
+        for col in range(4):
+            if all(board[row + i][col + i] == player for i in range(4)):
                 return True
 
-    for i in range(len(board) - 3):
-        for j in range(3, len(board[0])):
-            if all(board[i + k][j - k] == player for k in range(4)):
+    # Check diagonally (from top-right to bottom-left)
+    for row in range(3):
+        for col in range(3, 7):
+            if all(board[row + i][col - i] == player for i in range(4)):
                 return True
 
     return False
 
-# Function to ask if players want to play again
+
+def is_full(board):
+    return all(cell != " " for row in board for cell in row)
 
 
-def play_again():
+def player_move(board, player):
     while True:
-        choice = input('Do you want to play again? (yes / no): ').lower()
-        if choice in ('yes', 'no'):
-            return choice
-        else:
-            print('Invalid choice. Please enter "yes" or "no".')
+        try:
+            col = int(input(f"{player}, enter a column (1-7): ")) - 1
+            if 0 <= col <= 6 and board[0][col] == " ":
+                for row in range(5, -1, -1):
+                    if board[row][col] == " ":
+                        board[row][col] = player[0]
+                        break
+                break
+            else:
+                print("Invalid move. Please try again.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
 
-# Main gameplay function
 
-
-def play_game():
-    print('Welcome to Connect 4!')
+def computer_move(board):
+    print("Please wait... Computer is thinking...")
+    time.sleep(2)
     while True:
-        cols = 7
-        rows = 6
-        board = create_board(rows, cols)
-        player1_name = input('Enter the name of Player 1 (x): ')
-        game_mode = input('Choose a game mode (1 for player vs player, '
-                          '2 for player vs computer): ')
-
-        if game_mode == '1':
-            player2_name = input('Enter the name of Player 2 (o): ')
-        elif game_mode == '2':
-            player2_name = "Computer"
-        else:
-            print('Invalid choice. Please enter 1 or 2')
-            return
-
-        players = {'x': player1_name, 'o': player2_name}
-        current_player = 'x'
-
-        while True:
-            print_board(board)
-
-            try:
-                if current_player != 'Computer':
-                    prompt = (
-                       f"{players[current_player]} choose a column "
-                       f"(0 - {cols - 1}): "
-                    )
-                    col_input = input(prompt).strip()
-                    if col_input.isdigit():
-                        col = int(col_input)
-                        if 0 <= col < cols:
-                            if is_valid_move(board, col):
-                                make_move(board, col, current_player)
-                                if check_the_winner(current_player, board):
-                                    print_board(board)
-                                    print(f'{players[current_player]} wins!')
-                                    break
-                                elif all(
-                                    cell != ' '
-                                    for row in board
-                                    for cell in row
-                                ):
-                                    print_board(board)
-                                    print("It's a tie!")
-                                    break
-                                # Switch players
-                                if current_player == 'x':
-                                    current_player = 'o'
-                                else:
-                                    current_player = 'x'
-                            else:
-                                print('Invalid column. Please choose a column '
-                                      'within the valid range.')
-                        else:
-                            print('Invalid input. '
-                                  'Please enter a valid number.')
-                    else:
-                        print('Invalid input. Please enter a valid number.')
-                else:
-                    print(f'{players[current_player]} '
-                          'Please wait...Computer is thinking...')
-                    time.sleep(2)  # Time delay while computer thinks
-                    col = random.randint(0, cols - 1)
-                    #  To get random move from index
-                    if col is not None:
-                        make_move(board, col, current_player)
-                        if check_the_winner(current_player, board):
-                            print_board(board)
-                            print(f'{players[current_player]} wins!')
-                            break
-                        elif all(
-                            cell != ' '
-                            for row in board
-                            for cell in row
-                        ):
-                            print_board(board)
-                            print("It's a tie!")
-                            break
-                    # Switch player
-                    current_player = 'x' if current_player == 'o' else 'o'
-
-            except ValueError:
-                print('Invalid input. Please enter a valid number.')
-
-        choice = play_again()
-        if choice == 'no':
+        col = random.randint(0, 6)
+        if board[0][col] == " ":
+            for row in range(5, -1, -1):
+                if board[row][col] == " ":
+                    board[row][col] = "O"
+                    break
             break
 
 
-if __name__ == '__main__':
-    play_game()
+def play_game():
+    board = [[" " for _ in range(7)] for _ in range(6)]
+
+    if choice == "2":
+        player1 = input("Enter the name of Player 1: ")
+        player2 = input("Enter the name of Player 2: ")
+    else:
+        player1 = input("Enter your name: ")
+        player2 = "Computer"
+
+    while True:
+        print_board(board)
+
+        # Player 1's move
+        player_move(board, player1)
+        if check_win(board, player1[0]):
+            print_board(board)
+            print(f"{player1} wins!")
+            break  # End the game
+
+        if is_full(board):
+            print_board(board)
+            print("It's a draw!")
+            break  # End the game
+
+        print_board(board)
+
+        # Player 2's move (or Computer's move in case of player vs computer)
+        if choice == "2":
+            player_move(board, player2)
+        else:
+            computer_move(board)
+
+        if check_win(board, "O"):
+            print_board(board)
+            print(f"{player2} wins!")
+            break  # End the game
+
+        if is_full(board):
+            print_board(board)
+            print("It's a draw!")
+            break  # End the game
+
+            play_again = input("Do you want to play another game? (yes/no): ")
+            play_again = play_again.lower()
+            if play_again != "yes":
+                break
+
+
+if __name__ == "__main__":
+    print("Welcome to Connect 4!")  # Welcome message
+    print("1. Player vs Computer")  # Option 1
+    print("2. Player vs Player")  # Option 2
+
+    while True:
+        choice = input("Enter your choice (1 or 2): ")
+
+        if choice == "1":
+            print("Player vs Computer")
+            play_game()
+        elif choice == "2":
+            print("Player vs Player")
+            play_game()
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
