@@ -89,16 +89,16 @@ def play_game():
         if check_win(board, player1[0]):
             print_board(board)
             print(f"{player1} wins!")
-            break  # End the game
+            break  # End game
 
         if is_full(board):
             print_board(board)
             print("It's a draw!")
-            break  # End the game
+            break  # End game
 
         print_board(board)
 
-        # Player 2's move (or Computer's move in case of player vs computer)
+        # Player 2's move (or Computer's move if player vs computer)
         if choice == "2":
             player_move(board, player2)
         else:
@@ -107,12 +107,12 @@ def play_game():
         if check_win(board, "O"):
             print_board(board)
             print(f"{player2} wins!")
-            break  # End the game
+            break  # End game
 
         if is_full(board):
             print_board(board)
             print("It's a draw!")
-            break  # End the game
+            break  # End game
 
             play_again = input("Do you want to play another game? (yes/no): ")
             play_again = play_again.lower()

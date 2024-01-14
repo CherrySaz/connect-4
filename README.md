@@ -1,5 +1,7 @@
 # Welcome to my Connect 4 Game
 
+![computer gameplay](https://github.com/CherrySaz/connect-4/assets/134415334/6d97e702-1eb5-4d4b-a9c1-d79c9e97b807)
+
 # About my project
 
 Welcome to my Connect 4 game. This is a fun strategy game created using Python and has been built in the terminal. It is a Player vs Player game, with the option to play against the computer if required. 
