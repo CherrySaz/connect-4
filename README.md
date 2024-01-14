@@ -48,7 +48,13 @@ Once 4 in a row have been acheived by either player, or computer, a message will
 • Option to play again immediately after. No reloading or waiting
 
 
+
 ## Testing
+
+
+This game was tested in the terminal throughout using run.py. It was also tested using The Code Institute's PEP-8 template. (https://pep8ci.herokuapp.com/)
+
+![Pep-8 screenshot](https://github.com/CherrySaz/connect-4/assets/134415334/e4e72963-3047-4f50-b9a3-fc6be56ae5f5)
 
 
 
