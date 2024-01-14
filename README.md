@@ -12,7 +12,9 @@ As a small child, Connect 4 was a family favourite, which gave me my inspiration
 The game was originally released under a company called 'Score Four' until in 1968, it was bought by a company called 'Funtastic'.
 The more modern version of the game was created by 2 business partners, 'Howard Wexler', a toy inventor, and 'Ned Strongin'.
 The game was licensed in 1974 by Milton Bradley, which was later purchased by a toy company that is still going strong today, Hasbro.
-In 1988, Connect 4 was solved for the first time. Today, there are various different sizes of the game. There's a household version, a travel version, even a giant garden version so you can play it outside in the warmer months.There are even giant versions of Connect 4 in pub gardens and play areas around the Country, which just shows its popularity!
+In 1988, Connect 4 was solved for the first time. Today, there are various different sizes of the game. There's a household version, a travel version, an electronic version and even a giant garden version so you can play it outside in the warmer months.There are even giant versions of Connect 4 in pub gardens and play areas around the Country, which just shows its popularity!
+
+![Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/762b8ff6-f709-474d-ac27-64d5ace94e13) ![Travel Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/040bc42b-7f80-4cda-99d3-a3c9624d3927) ![Electronic Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/8e407482-cbbc-4731-a583-b08fb60465de) ![Giant Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/b34bce77-1838-4332-8753-ea28864aa6d8)
 
 ## 
 
