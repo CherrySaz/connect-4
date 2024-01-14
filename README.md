@@ -35,6 +35,25 @@ Once 4 in a row have been acheived by either player, or computer, a message will
 7. Once game has completed, the winner is announced
 8. Choose another column to play again or exit
 
+## Features
+
+• Welcome message
+
+• Choice of playing player vs player or against the computer
+
+• A clear game board to play on
+
+• Winner is announced once four in a row is acheived
+
+• Option to play again immediately after. No reloading or waiting
+
+
+## Testing
+
+
+
+
+
 
 
 
