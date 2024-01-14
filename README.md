@@ -18,6 +18,11 @@ In 1988, Connect 4 was solved for the first time. Today, there are various diffe
 
 ## User Experience (UX)
 
+My Connect 4 game is a command line application. It's written in the Python language only and is playable on one screen. The user can choose to play with another player, using the same kyboard, or, they can choose to play against the computer if they so wish.  The user will be asked which option they would like to select. Option 1 will be playing against the computer, and Option 2, against another player. They will then be asked to enter their name, which makes it more personable for the user, instead of just having 'Player 1' or 'Player 2'. They will then be presented with a board (or grid) on screen. They will be asked to make a move in turn. Once a move has been chosen, their initial will be displayed on the player board to show where they have placed their player token. When player against the computer, the computer's move will be displayed an 'o' for 'opponent' by default.
+Once 4 in a row have been acheived by either player, or computer, a message will be displayed to say who wins.
+
+
+
 
 
 
