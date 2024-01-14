@@ -4,10 +4,10 @@
 
 # About my project
 
-Welcome to my Connect 4 game. This is a fun strategy game created using Python and has been built in the terminal. It is a Player vs Player game, with the option to play against the computer if required. 
-As a small child, Connect 4 was a family favourite, which gave me my inspiration for my project.
+Welcome to my Connect 4 game. This is a fun strategy game created using Python and has been built in the terminal. It is a Player vs Player game, as well as a player vs computer game. The choice is yours!
+As a small child, Connect 4 was a family favourite, which gave me my inspiration for my project. It's so much fun! Who can score four in a row first? Can you beat the computer?
 
-# Some history about  the game
+# Some history about the game
 
 The game was originally released under a company called 'Score Four' until in 1968, it was bought by a company called 'Funtastic'.
 The more modern version of the game was created by 2 business partners, 'Howard Wexler', a toy inventor, and 'Ned Strongin'.
@@ -16,13 +16,15 @@ In 1988, Connect 4 was solved for the first time. Today, there are various diffe
 
 ![Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/762b8ff6-f709-474d-ac27-64d5ace94e13) ![Travel Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/040bc42b-7f80-4cda-99d3-a3c9624d3927) ![Electronic Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/8e407482-cbbc-4731-a583-b08fb60465de) ![Giant Connect 4](https://github.com/CherrySaz/connect-4/assets/134415334/b34bce77-1838-4332-8753-ea28864aa6d8)
 
+## User Experience (UX)
+
+
+
+
+
+
+
 ## 
-
-
-
-
-
-## Game History
 
 
 ## Reminders
