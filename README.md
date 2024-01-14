@@ -22,6 +22,21 @@ My Connect 4 game is a command line application. It's written in the Python lang
 Once 4 in a row have been acheived by either player, or computer, a message will be displayed to say who wins.
 
 
+![A player who has won](https://github.com/CherrySaz/connect-4/assets/134415334/af0da8ac-0b1e-427b-b7a7-d0360659183a)
+
+## How to play
+
+1. Click the link to the game and open on your browser
+2. You will be greeting with a welcome message and presented with the player board. You will also be asked to choose an option
+3. Choose an option, 1 or 2
+4. Enter your name / names
+5. Choose a column
+6. Continue to choose columns until 4 in a row is acheived
+7. Once game has completed, the winner is announced
+8. Choose another column to play again or exit
+
+
+
 
 
 
